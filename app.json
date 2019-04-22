@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/post/post",
+    "pages/poster/poster"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "爱敲代码的猫",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "plugins": {
+    "htmltowxml": {
+      "version": "1.3.1",
+      "provider": "wxa51b9c855ae38f3c"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

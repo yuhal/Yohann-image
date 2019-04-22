@@ -1,0 +1,12 @@
+{
+    "usingComponents": {
+        "htmltowxml": "plugin://htmltowxml/view",
+        "i-spin": "../../dist/spin/index",
+        "i-tag": "../../dist/tag/index",
+        "i-icon": "../../dist/icon/index",
+        "i-divider": "../../dist/divider/index",
+        "i-message": "../../dist/message/index"
+    },
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+}
