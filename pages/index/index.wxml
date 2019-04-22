@@ -3,7 +3,7 @@
 <view class="mask" hidden="{{aflag}}" catchtap="closeMask">
     <view class="masks" catchtap="prevent" animation="{{ani}}">
         <view class="box">
-            <image class="leftImage" mode="widthFix" src="https://blog.eunji.cn/upload/2018/11/微信图片_2018122511545020181225115902899.png"></image>
+            <image class="leftImage" mode="widthFix" src="https://wx.qlogo.cn/mmopen/vi_32/qeDfVAdQaLZy3hOuTcrZ37Ob7MQ6QVgVDWWRNyFHeeyuLiaKVHhpkzIShu3swUwQAL6ToUEVCFiayib5LmPaO6onA/132"></image>
             <view class="right">
                 <view class="title">
                     <text class="name">HaI</text>
@@ -36,14 +36,14 @@
     </view>
 
     <view class="nav" hidden="{{nav}}">
-        <view class="nav-text">HaI丶博客</view>
+        <view class="nav-text">{{blogName}}</view>
         <view bindtap="showMask" class='qrcode nav-qrcode'></view>
     </view>
 
     <!-- Posts -->
     <view class="post-card" wx:for="{{posts}}" wx:key="postId" animation="{{anp}}">
         <!-- Navigator页面跳转 -->
-        <navigator url="../post/post?postId={{item.postId}}">
+        <navigator url="../post/post?postId={{item.article_id}}">
             <view class="post-card-image-link">
                 <image class="img" lazy-load="true" mode="widthFix" src="{{item.pic}}"></image>
             </view>

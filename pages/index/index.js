@@ -21,8 +21,6 @@ Page({
     aflag: true,
     scrollTop: 0,
     nav: true,
-    //data将用来存储towxml数据
-    data: {}
   },
 
   /**
@@ -84,6 +82,7 @@ Page({
 
     var that = this;
     var pageNums = that.data.pageNum + 1;
+    
     console.log('加载更多' + pageNums);
     var posts_list = [];
     var total = that.data.total;
@@ -95,29 +94,29 @@ Page({
     var Num = 5;
     var flag = 0;
     var flag1 = 0;
-    var count = that.total;
+    var count = total;
     if (count < 5) {
       flag1 = 1;
     }
-    console.log(that.article_list);
-
+    
+   
     if (that.data.Flag == 0) {
-      if (that.pageNum < (b - 1) || a == 0) {
+      if (that.data.pageNum  < (b - 1) || a == 0) {
         if (a == 0 && pageNums == (c - 1)) {
           flag = 1;
         }
         for (var i = 0; i < 5; i++) {
-          posts_list.push(that.article_list[i + (Num * pageNums)]);
+          posts_list.push(that.data.posts_list[i + (Num * pageNums)]);
         }
 
       } else {
         for (var i = 0; i < a; i++) {
-          posts_list.push(that.article_list[i + (Num * pageNums)]);
+          posts_list.push(that.data.posts_list[i + (Num * pageNums)]);
         }
         flag = 1;
       }
     }
-    console.log(posts_list);
+    console.log(posts_list); 
 
     that.setData({
       loadMore: true,

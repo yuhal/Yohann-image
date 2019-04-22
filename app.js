@@ -1,5 +1,4 @@
 //app.js
-const Towxml = require('/utils/towxml/main'); 
 App({
     onLaunch: function() {
         // 展示本地存储能力
@@ -37,11 +36,10 @@ App({
     globalData: { //全局变量
         userInfo: null,
         URL: "https://www.yuhal.com",
-        blogName: "HaI",
-      avatar: "https://wx.qlogo.cn/mmopen/vi_32/qeDfVAdQaLZy3hOuTcrZ37Ob7MQ6QVgVDWWRNyFHeeyuLiaKVHhpkzIShu3swUwQAL6ToUEVCFiayib5LmPaO6onA/132",
+        blogName: "HaI丶博客",
+        avatar: "https://wx.qlogo.cn/mmopen/vi_32/qeDfVAdQaLZy3hOuTcrZ37Ob7MQ6QVgVDWWRNyFHeeyuLiaKVHhpkzIShu3swUwQAL6ToUEVCFiayib5LmPaO6onA/132",
         TOKEN: "token",
         highlightStyle: "dracula", //代码高亮样式，可用值default,darcula,dracula,tomorrow
     },
-    towxml: new Towxml()
     
 })

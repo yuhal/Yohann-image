@@ -22,6 +22,7 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         userAgent: '',
         scene: 0,
+        postId:'',
     },
 
     /**
@@ -70,21 +71,19 @@ Page({
             })
         }
 
-
+   
         page = this;
+      
         this.setData({
-            postId: options.postId,
+          postId: options.postId,
         })
+        
         // wx.showNavigationBarLoading() //在标题栏中显示加载
         var that = this; //不要漏了这句，很重要
-        var postId = options.postId;
-        var url = app.globalData.URL + '/api/posts/' + postId;
+      var postId = options.postId;
+        var url = app.globalData.URL + '/api/article/' + postId;
         var token = app.globalData.TOKEN;
         var params = {};
-
-        //@todo commentFlag网络请求API数据
-        var commentUrl = app.globalData.URL + '/api/options/one?optionName=comment_api_switch';
-        request.requestGetApi(commentUrl, token, params, this, this.successComment, this.failComment);
 
         //@todo 文章内容网络请求API数据
         request.requestGetApi(url, token, params, this, this.successFunPost, this.failFunPost);
@@ -184,8 +183,8 @@ Page({
             console.log(res.target)
         }
         return {
-            title: this.data.postTitle,
-            path: '/pages/post/post?postId=' +  this.data.postId,
+            title: this.data.article_title,
+            path: '/pages/post/post?postId=' + this.data.article_id,
             imageUrl: app.globalData.URL + this.data.postThumbnail,
         }
     },
@@ -215,23 +214,12 @@ Page({
     successFunPost: function (res, selfObj) {
         var that = this;
         var barrages = [];
-
+        console.log(res);return
         that.setData({
-            post: res.result,
-            postDate: res.result.postDate,
-            postTitle: res.result.postTitle,
-            comments: res.result.comments,
-            commentsCount: res.result.comments.length,
-            postThumbnail: res.result.postThumbnail,
+            post: res,
+            postDate: res.create_time,
+            postTitle: res.article_title,
         })
-
-        for (i = 0; i < that.data.comments.length; i++) {
-            var temp = that.data.comments[i].commentContent;
-            //js正则过滤HTML标签
-            let reg = new RegExp(/<[^<>]+>/g);
-            let temps = temp.replace(reg, '');
-            barrages[i] = that.data.comments[i].commentAuthor + "：" + temps;
-        };
 
         that.setData({
             barrages: barrages,
@@ -297,63 +285,12 @@ Page({
     },
 
     /**
-     * 发送评论
-     */
-    sendComment() {
-        var that = this;
-        var postId = that.data.postId;
-        var url = app.globalData.URL + '/api/comments/save';
-        var token = app.globalData.TOKEN;
-        var params = {
-            postId: postId,
-            commentContent: that.data.inputValue,
-            commentAuthor: app.globalData.userInfo.nickName,
-            commentAuthorEmail: '',
-            commentAuthorUrl: app.globalData.userInfo.avatarUrl,
-            commentAgent: that.data.userAgent,
-            commentParent: '0',
-        };
-
-
-        if (that.data.inputValue != null && that.data.inputValue != '') {
-            doommList.push(new Doomm(that.data.inputValue, Math.ceil(Math.random() * 100), 2 + Math.ceil(Math.random() * 10), getRandomColor()));
-            that.setData({
-                doommData: doommList,
-                inputValue: '',
-            });
-
-            //@todo 文章内容网络请求API数据
-            request.requestPostApi(url, token, params, this, this.successSend, this.failSend);
-        } else {
-            $Message({
-                content: '请输入吐槽内容',
-                duration: 2
-            });
-        }
-    },
-
-    /**
-     * 发送评论请求--接口调用成功处理
-     */
-    successSend: function (res, selfObj) {
-        var that = this;
-        console.log(res.msg);
-    },
-    
-    /**
-     * 发送评论请求--接口调用失败处理
-     */
-    failSend: function (res, selfObj) {
-        console.log('failSend', res)
-    },
-
-    /**
      * 生成海报跳转
      */
     createPoster() {
         console.log("createPoster生成海报");
         wx.navigateTo({
-            url: '../poster/poster?postId=' + this.data.postId,
+            url: '../poster/poster?postId=' + this.data.article_id,
         })
     },
 

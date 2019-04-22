@@ -44,12 +44,12 @@ Page({
     onLoad: function (options) {
 
         this.setData({
-            postId: options.postId,
+          postId: options.postId,
         })
 
         // wx.showNavigationBarLoading() //在标题栏中显示加载
         var that = this; //不要漏了这句，很重要
-        var postId = options.postId;
+      var postId = options.postId;
         var url = app.globalData.URL + '/api/posts/' + postId;
         var userAvatarUrl = app.globalData.URL;
         var token = app.globalData.TOKEN;
