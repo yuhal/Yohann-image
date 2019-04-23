@@ -16,30 +16,21 @@
     <view bindtap="returnPage" class='return nav-return'></view>
 </view>
 
-<!-- 悬浮生存海报按钮 -->
-<!-- <view class="sharePoster">
-    <navigator url="../poster/poster?postId={{post.postId}}">
-        <i-icon type="share" size="28" color="#fff"/>
-    </navigator>
-</view> -->
-
 <view class="content">
 
     <view slot="title" class="top">
-        <view class="stickyTitle">{{post.postTitle}}</view>
+        <view class="stickyTitle">{{postTitle}}</view>
         <view class="titleTags">
             <i-tag wx:for="{{post.tags}}" wx:key="tagId" type="border" style="margin-right: 5px;">
-                {{item.tagName}}
+                {{item.tag_name}}
             </i-tag>
             <view class="titleData">
-                <i-icon type="time" size="12" color="#cccccc" />{{post.postDate}}
-                <i-icon type="browse" size="12" color="#cccccc" />{{post.postViews}}
-                <view bindtap='createPoster' class='poster'></view>
+                <i-icon type="time" size="12" color="#cccccc" />{{post.create_time}}
             </view>
         </view>
     </view>
-    <view slot="content" style="margin-top:10px;">
-        <htmltowxml text="{{post.postContent}}" highlightStyle="{{style}}" linenums="{{false}}" showLoading="{{false}}" bindWxmlTagATap="wxmlTagATap"></htmltowxml>
+    <view wx:for="{{post.des}}" slot="content" style="margin-top:10px;">
+        <htmltowxml text="{{item.text}}" highlightStyle="{{style}}" linenums="{{false}}" showLoading="{{false}}" bindWxmlTagATap="wxmlTagATap"></htmltowxml>
     </view>
 
 

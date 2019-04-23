@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [   
     "pages/index/index",
     "pages/post/post",
     "pages/poster/poster"
@@ -7,7 +7,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "爱敲代码的猫",
+    "navigationBarTitleText": "HaI丶博客",
     "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },

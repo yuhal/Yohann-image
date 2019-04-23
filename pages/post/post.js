@@ -13,7 +13,7 @@ Page({
         scrollTop: 0,
         linenums: false,
         spinShow: true,
-        Author: "WeHalo",
+        Author: "HaI",
         spinShows: '',
         commentsFlag: false,
         style: app.globalData.highlightStyle,
@@ -29,17 +29,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
-        //获取场景
-        var sceneNum = wx.getLaunchOptionsSync().scene;
-        if (sceneNum == 1007 || sceneNum == 1008) {
-            // 通过单人聊天会话分享进入 或者是  通过群聊会话分享进入
-            // scene记录是否通过这些场景进来的1是，0否
-            this.setData({
-                scene: 1
-            });
-        }
-        console.log(sceneNum);
 
         /**
          * 获取用户信息
@@ -213,25 +202,15 @@ Page({
      */
     successFunPost: function (res, selfObj) {
         var that = this;
-        var barrages = [];
-        console.log(res);return
         that.setData({
             post: res,
             postDate: res.create_time,
             postTitle: res.article_title,
         })
-
-        that.setData({
-            barrages: barrages,
-        })
-
-
-        console.log(that.data.commentsCount);
-
-        console.log(that.data.barrages);
+        
         //动态设置当前页面的标题
         wx.setNavigationBarTitle({
-            title: res.result.postTitle,
+            title: res.article_title,
         })
     },
 
