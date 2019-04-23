@@ -248,7 +248,7 @@
 
 .right {
     width: 65%;
-    height: 230rpx;
+    height: 260rpx;
     background-color: #fff;
     border: 4rpx solid #e6e6e6;
     border-radius: 0 10px 10px 0;
@@ -257,6 +257,7 @@
 .info {
     text-align: left;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 .field {

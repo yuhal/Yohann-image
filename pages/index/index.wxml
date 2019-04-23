@@ -30,7 +30,7 @@
     <view class="top">
         <view class="aquanblog">
             {{blogName}}
-            <view class="aquanblogs">{{jinrishici}}</view>
+            <view class="aquanblogs">我们能从绝望之山上砍下希望之石</view>
         </view>
         <view bindtap="showMask" class='qrcode'></view>
     </view>
@@ -48,14 +48,12 @@
                 <image class="img" lazy-load="true" mode="widthFix" src="{{item.pic}}"></image>
             </view>
             <view class="post-card-content">
-                <view style="margin-left: 10px; color: #cccccc;">
-                    <i-tag wx:for="{{item.tags}}" wx:key="tagId" type="border" style="margin-right: 5px;">
-                        {{item.value}}
-                    </i-tag>
-                </view>
                 <view class="title">{{item.article_title}}</view>
-                <view class="footer">
-                    <i-avatar src="{{userAvatar}}" size="small"></i-avatar>
+                <view class="footer" style="color: #cccccc;">
+                    <i-avatar style="margin-right: 10px;" src="{{userAvatar}}" size="small"></i-avatar>
+                    <i-tag wx:for="{{item.tags}}" type="border" style="margin-right: 5px;">
+                        {{item.tag_name}}
+                    </i-tag>
                     <view class="postDate">{{item.create_time}}</view>
                 </view>
             </view>

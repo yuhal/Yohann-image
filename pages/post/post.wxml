@@ -20,16 +20,13 @@
 
     <view slot="title" class="top">
         <view class="stickyTitle">{{postTitle}}</view>
-        <view class="titleTags">
-            <i-tag wx:for="{{post.tags}}" wx:key="tagId" type="border" style="margin-right: 5px;">
-                {{item.tag_name}}
-            </i-tag>
-            <view class="titleData">
-                <i-icon type="time" size="12" color="#cccccc" />{{post.create_time}}
-            </view>
+        <view class="titleData">
+        <i-tag wx:for="{{post.tags}}" type="border" style="margin-right: 5px;">{{item.tag_name}}</i-tag>
+            <i-icon type="time" size="12" color="#cccccc" />{{post.create_time}}
         </view>
     </view>
     <view wx:for="{{post.des}}" slot="content" style="margin-top:10px;">
+        {{item.name}}
         <htmltowxml text="{{item.text}}" highlightStyle="{{style}}" linenums="{{false}}" showLoading="{{false}}" bindWxmlTagATap="wxmlTagATap"></htmltowxml>
     </view>
 

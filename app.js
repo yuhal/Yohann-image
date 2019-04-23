@@ -36,7 +36,7 @@ App({
     globalData: { //全局变量
         userInfo: null,
         URL: "https://www.yuhal.com",
-        blogName: "HaI丶博客",
+        blogName: "HaI丶Blog",
         avatar: "https://wx.qlogo.cn/mmopen/vi_32/qeDfVAdQaLZy3hOuTcrZ37Ob7MQ6QVgVDWWRNyFHeeyuLiaKVHhpkzIShu3swUwQAL6ToUEVCFiayib5LmPaO6onA/132",
         TOKEN: "token",
         highlightStyle: "dracula", //代码高亮样式，可用值default,darcula,dracula,tomorrow
