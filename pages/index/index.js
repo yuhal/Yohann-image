@@ -1,359 +1,171 @@
-//index.js
-//获取应用实例
-const app = getApp();
-const jinrishici = require('../../utils/jinrishici.js');
-const { $Message } = require('../../dist/base/index');
-const request = require('../../utils/request.js');
-
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
-    spinShow: true,
-    Author: "HaI",
-    Num: 5,
-    pageNum: 0,
-    Flag: 0,
-    loadMore: false,
-    loadMores: false,
-    blogName: app.globalData.blogName,
-    aflag: true,
-    scrollTop: 0,
-    nav: true,
+    inputShowed: false,
+    inputVal: "",
+    kjsearchList: ['圣诞快乐', '旧时光', '周岁', '双12'],
+    items: [
+      { id: 1, title: '模版1', cover: 'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg' },
+      { id: 2, title: '模版2', cover: 'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg' },
+      { id: 3, title: '模版3', cover: 'http://img.huiyoobao.com/funny/columnback/1473825601094_orign.jpg' },
+      { id: 4, title: '模版4', cover: 'http://img.huiyoobao.com/funny/columnback/1473825076410_orign.jpg' },
+      { id: 5, title: '模版5', cover: 'http://img.huiyoobao.com/funny/columnback/1473825075998_orign.jpg' }],
+    winHeight: 0,
+    winWidth: 0,
+    searchKeyWords: '',
+    placeholderWords: '请输入搜索关键词...'
   },
-
-  /**
-   * 下拉刷新
-   */
-  onPullDownRefresh() {
-
-    // wx.showNavigationBarLoading() //在标题栏中显示加载
-    var that = this; //不要漏了这句，很重要
-    var url = app.globalData.URL + '/api/listArticle';
-    var userAvatarUrl = app.globalData.URL;
-    var params = {};
-    //@todo 网络请求API数据
-    request.requestGetApi(url, params, this, this.successFunRefreshPosts, this.failFunRefreshPosts);
-
+  showInput: function () {
+    this.setData({
+      inputShowed: true
+    });
   },
-
-  /**
-   * 事件处理函数
-   */
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
+  hideInput: function () {
+    this.setData({
+      inputVal: "",
+      inputShowed: false
     })
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
-    this.app = getApp();
-    var that = this; //不要漏了这句，很重要
-    var url = app.globalData.URL + '/api/listArticle';
-    var userAvatarUrl = app.globalData.URL;
-    var token = app.globalData.TOKEN;
-    var params = {};
-    //@todo 网络请求API数据
-    request.requestGetApi(url, token, params, this, this.successFunPosts, this.failFunPosts);
+  clearInput: function () {
+    this.setData({
+      inuptVal: ""
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () { },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    return {
-      title: app.globalData.blogName
-    }
+  inputTyping: function (e) {
+    this.setData({
+      inputVal: e.detail.value
+    })
   },
-
-  /**
-   * 加载更多
-   */
-  onReachBottom: function () {
-
-    var that = this;
-    var pageNums = that.data.pageNum + 1;
-    
-    console.log('加载更多' + pageNums);
-    var posts_list = [];
-    var total = that.data.total;
-    var a = total % 5;
-    // var b = (total / 5).toFixed(0);
-    var b = Math.floor(total / 5);
-    var c = parseInt(total / 5);
-    console.log(a + "|" + b + "|" + c);
-    var Num = 5;
-    var flag = 0;
-    var flag1 = 0;
-    var count = total;
-    if (count < 5) {
-      flag1 = 1;
-    }
-    
-   
-    if (that.data.Flag == 0) {
-      if (that.data.pageNum  < (b - 1) || a == 0) {
-        if (a == 0 && pageNums == (c - 1)) {
-          flag = 1;
-        }
-        for (var i = 0; i < 5; i++) {
-          posts_list.push(that.data.posts_list[i + (Num * pageNums)]);
-        }
-
-      } else {
-        for (var i = 0; i < a; i++) {
-          posts_list.push(that.data.posts_list[i + (Num * pageNums)]);
-        }
-        flag = 1;
-      }
-    }
-    console.log(posts_list); 
-
-    that.setData({
-      loadMore: true,
-    });
-
-    console.log(that.data.Flag);
-    if (that.data.Flag == 0) {
-      if (flag1 == 1) {
-        setTimeout(function () {
-          that.setData({
-            loadMore: false,
-            loadMores: true,
-          });
-          $Message({
-            content: '博主已经努力了，会坚持每周一更。',
-            duration: 2
-          });
-        }, 200);
-      } else {
-        setTimeout(function () {
-          that.setData({
-            pageNum: pageNums,
-            posts: that.data.posts.concat(posts_list),
-            Flag: flag,
-            loadMore: false,
-          });
-        }, 200);
-      }
-    } else {
-      setTimeout(function () {
+  collectApi: function (e) {
+    console.log("此处进行收藏！");
+  },
+  previewImage: function (e) {
+    console.log(e.currentTarget.dataset.albumid);
+    //进入创作页面
+    // wx.navigateTo({
+    //   url: '?albumId='+e.currentTarget.dataset.albumid
+    // })
+  },
+  onLoad: function (options) {
+    let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
         that.setData({
-          loadMore: false,
-          loadMores: true,
-        });
-        $Message({
-          content: '博主已经努力了，会坚持每周一更。',
-          duration: 2
-        });
-      }, 200);
+          winHeight: res.windowHeight,
+          winWidth: res.windowWidth
+        })
+      }
+    })
+    if (!wx.getStorageSync('userId')) {
+      wx.showModal({
+        title: '授权提示',
+        content: '将访问你的基本信息',
+        showCancel: true,
+        success: function (res) {
+          if (res.confirm) {
+            //用户点击确定
+            wx.login({
+              success: function (res) {
+                //获取code
+                wx.request({
+                  url: 'http://localhost:8080/dream-album/dream/user/login/getSession.json',
+                  data: {
+                    code: res.code
+                  },
+                  method: 'GET',
+                  success: function (ress) {
+                    wx.getUserInfo({
+                      success: function (ress) {
+                        //缓存第三方key
+                        wx.setStorageSync('threeSessionKey', ress.data);
+                        wx.request({
+                          url: 'http://localhost:8080/dream-album/dream/user/login/getUserInfo.json',
+                          data: {
+                            threeSessionKey: ress.data,
+                            encryptedData: res.encryptedData,
+                            iv: res.iv
+                          },
+                          method: 'GET',
+                          success: function (res) {
+                            //缓存用户id
+                            wx.setStorageSync('userId', res.data)
+                          }
+                        })
+                      },
+                      fail: function () {
+                        console.log("获取用户信息出错！");
+                      }
+                    })
+                  }
+                })
+              },
+              fail: function () {
+                console.log("登录出错了！");
+              }
+            })
+          } else {
+            //用户点击取消
+            var randomStr = randomChar();
+            wx.setStorageSync('userId', randomStr);
+          }
+        }
+      })
     }
-
+    this.search('');
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+  searchKeyWords: function (e) {
+    console.log("搜索开始了了！");
+    let that = this;
+    if (that.data.searchKeyWords == that.data.placeholderWords) {
+      return;
+    }
+    that.search(that.data.searchKeyWords);
+  },
+  searchKeyWordsFast: function (e) {
+    this.search(e.currentTarget.dataset.keyword);
+  },
+  search(queryWords) {
+    console.log("当前搜索关键词：" + queryWords);
+    let that = this;
+    wx.request({
+      url: 'http://10.1.1.197:8080/dream-album/dream/album/common/homepage.json',
+      data: {
+        keyword: queryWords
+      },
+      method: 'GET',
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          items: res.data.albumList
+        })
+      }
+    })
+  },
+  getKeywords: function (e) {
+    // this.setData({
+    //   searchKeyWords:e.detail.value
+    // })
+    this.search(e.detail.value);
+  },
+  onReady: function () {
+    // 页面渲染完成
+  },
   onShow: function () {
-    // this.showPost();
+    // 页面显示
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide: function () {
-    // this.closePost();
+    // 页面隐藏
   },
-
-  handleQrcode() {
-    wx.previewImage({
-      urls: ['https://blog.eunji.cn/upload/2018/11/wx20181208174737572.png']
-    })
-  },
-
-  /**
-   * 防止冒泡
-   */
-  prevent() {
-    console.log("防止冒泡");
-    var self = this;
-    wx.setClipboardData({
-      data: "https://github.com/aquanlerou"
-    });
-
-  },
-
-  showMask() {
-    this.setData({
-      aflag: false,
-    });
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-      delay: 0
-    });
-    animation.opacity(1).translate(wx.getSystemInfoSync().windowWidth, 0).step()
-    this.setData({
-      ani: animation.export()
-    })
-  },
-
-  closeMask() {
-
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
-      delay: 0
-    });
-    animation.opacity(0).translate(-wx.getSystemInfoSync().windowWidth, 0).step()
-    that.setData({
-      ani: animation.export()
-    });
-
-    setTimeout(function () {
-      that.setData({
-        aflag: true,
-      });
-    }, 600);
-  },
-
-  /**
-   * Post淡入效果
-   */
-  showPost() {
-    var animation = wx.createAnimation({
-      duration: 2000,
-      timingFunction: 'ease',
-      delay: 0
-    });
-    animation.opacity(1).step();
-    this.setData({
-      anp: animation.export()
-    })
-  },
-
-  /**
-   * Post淡出效果
-   */
-  closePost() {
-    console.log("closePost");
-    var animation = wx.createAnimation({
-      duration: 2000,
-      timingFunction: 'ease',
-      delay: 0
-    });
-    animation.opacity(0).step();
-    this.setData({
-      anp: animation.export()
-    })
-  },
-
-  /**
-   * 监听屏幕滚动 判断上下滚动
-   */
-  onPageScroll: function (event) {
-    var that = this;
-    if (event.scrollTop > 100) {
-      that.setData({
-        nav: false
-      });
-    } else {
-      that.setData({
-        nav: true
-      });
-    }
-  },
-
-  /**
-   * 首頁文章列表请求--接口调用成功处理
-   */
-  successFunPosts: function (res, selfObj) {
-    var that = this;
-    var posts_list = [];
-    var count = res.count;
-    var userAvatarUrl = app.globalData.URL;
-    if (count < 5) {
-      for (var i = 0; i < count; i++) {
-        posts_list.push(res.article_list[i]);
-      }
-    } else {
-      for (var i = 0; i < 5; i++) {
-        posts_list.push(res.article_list[i]);
-      }
-    }
-
-    that.setData({
-      spinShow: false,
-      userName: app.globalData.blogName,
-      userAvatar: app.globalData.avatar,
-      posts: posts_list,
-      posts_list: res.article_list,
-      imageUrl: app.globalData.URL,
-      total: res.count,
-    })
-    //取消Loading效果
-    // wx.hideLoading();
-
-    //淡入动画效果
-    that.showPost();
-    selfObj.setData({
-      resultData: res.article_list,
-    })
-  },
-
-  /**
-   * 首頁文章列表请求--接口调用失败处理
-   */
-  failFunPosts: function (res, selfObj) {
-    console.log('failFunPosts', res)
-  },
-
-  /**
-   * 首頁文章列表下拉刷新请求--接口调用成功处理
-   */
-  successFunRefreshPosts: function (res, selfObj) {
-    var that = this;
-    var posts_list = [];
-    var count = res.count;
-    var userAvatarUrl = app.globalData.URL;
-    if (count < 5) {
-      for (var i = 0; i < count; i++) {
-        posts_list.push(res.article_list[i]);
-      }
-    } else {
-      for (var i = 0; i < 5; i++) {
-        posts_list.push(res.article_list[i]);
-      }
-    };
-    that.setData({
-      spinShow: false,
-      //res代表success函数的事件对，data是固定的，stories是是上面json数据中stories
-      userName: app.globalData.blogName,
-      userAvatar: app.globalData.avatar,
-      posts: posts_list,
-      //加载更多数据归零
-      pageNum: 0,
-      Flag: 0,
-      loadMores: false,
-    });
-  },
-
-  /**
-   * 首頁文章下拉刷新请求--接口调用失败处理
-   */
-  failFunRefreshPosts: function (res, selfObj) {
-    console.log('failFunRefreshPosts', res)
-  },
-
-
+  onUnload: function () {
+    // 页面关闭
+  }
 })
+function randomChar() {
+  var l = Math.random() * 10;
+  var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
+  var tmp = "";
+  var timestamp = new Date().getTime();
+  for (var i = 0; i < l; i++) {
+    tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
+  }
+  return timestamp + tmp;
+}

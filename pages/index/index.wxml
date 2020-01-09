@@ -1,66 +1,36 @@
-<!--index.wxml-->
-<!-- 蒙版效果 -->
-<view class="mask" hidden="{{aflag}}" catchtap="closeMask">
-    <view class="masks" catchtap="prevent" animation="{{ani}}">
-        <view class="box">
-            <image class="leftImage" mode="widthFix" src="https://wx.qlogo.cn/mmopen/vi_32/qeDfVAdQaLZy3hOuTcrZ37Ob7MQ6QVgVDWWRNyFHeeyuLiaKVHhpkzIShu3swUwQAL6ToUEVCFiayib5LmPaO6onA/132"></image>
-            <view class="right">
-                <view class="title">
-                    <text class="name">HaI</text>
-                </view>
-                <view class="info">
-                    <view class="field">Email</view>
-                    <view class="value">15736736889@163.com</view>
-                    <view class="field">Github</view>
-                    <view class="value">https://github.com/yuhal</view>
-                </view>
+<view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="getKeywords" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
             </view>
         </view>
-
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+        </label>
     </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
 </view>
-
-
-<view class="container" >
-
-    <!-- loading...加载 -->
-    <i-spin fix wx:if="{{spinShow}}"></i-spin>
-
-    <!-- 首页图片 -->
-    <view class="top">
-        <view class="aquanblog">
-            {{blogName}}
-            <view class="aquanblogs">我们能从绝望之山上砍下希望之石</view>
-        </view>
-        <view bindtap="showMask" class='qrcode'></view>
-    </view>
-
-    <view class="nav" hidden="{{nav}}">
-        <view class="nav-text">{{blogName}}</view>
-        <view bindtap="showMask" class='qrcode nav-qrcode'></view>
-    </view>
-
-    <!-- Posts -->
-    <view class="post-card" wx:for="{{posts}}" wx:key="postId" animation="{{anp}}">
-        <!-- Navigator页面跳转 -->
-        <navigator url="../post/post?postId={{item.article_id}}">
-            <view class="post-card-image-link">
-                <image class="img" lazy-load="true" mode="widthFix" src="{{item.pic}}"></image>
-            </view>
-            <view class="post-card-content">
-                <view class="title">{{item.article_title}}</view>
-                <view class="footer" style="color: #cccccc;">
-                    <i-avatar style="margin-right: 10px;" src="{{userAvatar}}" size="small"></i-avatar>
-                    <i-tag wx:for="{{item.tags}}" type="border" style="margin-right: 5px;">
-                        {{item.tag_name}}
-                    </i-tag>
-                    <view class="postDate">{{item.create_time}}</view>
+<!--快捷搜索-->
+<view class="kjss">
+    <text wx:for="{{kjsearchList}}" data-keyword="{{item}}" bindtap="searchKeyWordsFast" wx:key="kjsearchList" class="kjsousuo"> {{item}} </text>
+</view>
+<!--模版列表-->
+<view class="mobileListBorder">
+     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" style="height:400px;">
+        <view class="main">
+            <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain">
+                <view class="subMainImage">
+                    <image src="../../image/background-down.png" class="downImage"/>
+                    <image src="../../image/background-up.png" class="upImage"/>
+                    <image class="images" data-albumid="{{item.id}}" src="{{item.cover}}" bindtap="previewImage" />
+                    <image src="../../image/collect.png" class="collectImage" bindtap="collectApi"/>
                 </view>
+                <view class="subMainText">{{item.title}}</view>
             </view>
-        </navigator>
-    </view>
-    <i-message id="message" />
+        </view>
+    </scroll-view>
 </view>
-
-
-<i-load-more tip="{{Author}}" loading="{{loadMore}}" hidden="{{loadMores}}"/>

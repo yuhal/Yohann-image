@@ -1,5 +1,5 @@
 {
-	"description": "项目配置文件",
+	"description": "Project configuration file",
 	"packOptions": {
 		"ignore": []
 	},
@@ -9,14 +9,12 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.6.6",
 	"appid": "wxbb9a70d10651829b",
-	"projectname": "WeHaI",
+	"projectname": "miniprogram-test-2",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
