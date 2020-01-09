@@ -11,6 +11,7 @@
     "backgroundColor": "#fff",
     "navigationBarTextStyle": "white"
   },
+<<<<<<< HEAD
   "tabBar": {
     "color": "#74777e",
     "selectedColor": "#11cd6e",
@@ -30,6 +31,13 @@
         "text": "我的"
       }
     ]
+=======
+  "plugins": {
+    "htmltowxml": {
+      "version": "1.4.0",
+      "provider": "wxa51b9c855ae38f3c"
+    }
+>>>>>>> 265f9cdde07e1a9cb8b05f736cf42447940dc599
   },
   "sitemapLocation": "sitemap.json"
 }
