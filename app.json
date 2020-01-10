@@ -7,11 +7,10 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#3f3f3f",
-    "navigationBarTitleText": "聚梦相册",
+    "navigationBarTitleText": "HaI丶Image",
     "backgroundColor": "#fff",
     "navigationBarTextStyle": "white"
   },
-<<<<<<< HEAD
   "tabBar": {
     "color": "#74777e",
     "selectedColor": "#11cd6e",
@@ -23,21 +22,13 @@
         "iconPath": "image/fx.png",
         "selectedIconPath": "image/fxselect.png",
         "text": "发现"
-      },
-      {
+      },{
         "pagePath": "pages/my/my",
         "iconPath": "image/my.png",
         "selectedIconPath": "image/myselect.png",
-        "text": "我的"
+        "text": "关于我"
       }
     ]
-=======
-  "plugins": {
-    "htmltowxml": {
-      "version": "1.4.0",
-      "provider": "wxa51b9c855ae38f3c"
-    }
->>>>>>> 265f9cdde07e1a9cb8b05f736cf42447940dc599
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,49 +1,27 @@
 Page({
   data: {
-    inputShowed: false,
-    inputVal: "",
-    kjsearchList: ['圣诞快乐', '旧时光', '周岁', '双12'],
     items: [
-      { id: 1, title: '模版1', cover: 'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg' },
-      { id: 2, title: '模版2', cover: 'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg' },
-      { id: 3, title: '模版3', cover: 'http://img.huiyoobao.com/funny/columnback/1473825601094_orign.jpg' },
-      { id: 4, title: '模版4', cover: 'http://img.huiyoobao.com/funny/columnback/1473825076410_orign.jpg' },
-      { id: 5, title: '模版5', cover: 'http://img.huiyoobao.com/funny/columnback/1473825075998_orign.jpg' }],
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' },
+      { id: 1, title: '模版1', cover: 'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg' }
+      ],
     winHeight: 0,
     winWidth: 0,
-    searchKeyWords: '',
-    placeholderWords: '请输入搜索关键词...'
-  },
-  showInput: function () {
-    this.setData({
-      inputShowed: true
-    });
-  },
-  hideInput: function () {
-    this.setData({
-      inputVal: "",
-      inputShowed: false
-    })
-  },
-  clearInput: function () {
-    this.setData({
-      inuptVal: ""
-    })
-  },
-  inputTyping: function (e) {
-    this.setData({
-      inputVal: e.detail.value
-    })
   },
   collectApi: function (e) {
     console.log("此处进行收藏！");
   },
   previewImage: function (e) {
-    console.log(e.currentTarget.dataset.albumid);
-    //进入创作页面
-    // wx.navigateTo({
-    //   url: '?albumId='+e.currentTarget.dataset.albumid
-    // })
+    console.log("此处进行放大预览！");
   },
   onLoad: function (options) {
     let that = this;
