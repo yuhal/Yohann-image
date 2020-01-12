@@ -1,7 +1,8 @@
 {
   "pages": [
+    
+    "pages/about/about",
     "pages/index/index",
-    "pages/my/my",
     "pages/logs/logs"
   ],
   "window": {
@@ -21,14 +22,20 @@
         "pagePath": "pages/index/index",
         "iconPath": "image/fx.png",
         "selectedIconPath": "image/fxselect.png",
-        "text": "发现"
+        "text": "Image"
       },{
-        "pagePath": "pages/my/my",
-        "iconPath": "image/my.png",
-        "selectedIconPath": "image/myselect.png",
-        "text": "关于我"
+        "pagePath": "pages/about/about",
+        "iconPath": "image/about.png",
+        "selectedIconPath": "image/aboutselect.png",
+        "text": "About"
       }
     ]
+  },
+  "plugins": {
+    "htmltowxml": {
+      "version": "1.4.0",
+      "provider": "wxa51b9c855ae38f3c"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

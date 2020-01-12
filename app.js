@@ -1,4 +1,5 @@
 //app.js
+const Towxml = require('/towxml/main');     //引入towxml库
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -6,6 +7,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
+  towxml: new Towxml(),                     //创建towxml对象，供小程序页面使用
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {

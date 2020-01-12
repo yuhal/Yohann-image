@@ -1,0 +1,3 @@
+<!--pages/about/about.wxml-->
+<!-- 将Page中的content数据作为HTML格式渲染 -->
+<htmltowxml text="{{html}}" bindWxmlTagATap="wxmlTagATap" ></htmltowxml>
