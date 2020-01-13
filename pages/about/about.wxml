@@ -1,3 +1,2 @@
 <!--pages/about/about.wxml-->
-<!-- 将Page中的content数据作为HTML格式渲染 -->
-<htmltowxml text="{{html}}" bindWxmlTagATap="wxmlTagATap" ></htmltowxml>
+<web-view src="http://mp.weixin.qq.com/s?__biz=MzU4MTAwMzMwNQ==&mid=100000129&idx=1&sn=d9864f782f4b1030ae2df2888fb5d676&chksm=7d4f70c74a38f9d10192b83c11ca52aa41058f21caecde3ee1bfd00912edf46a89e3e875060f#rd"></web-view>

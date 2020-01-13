@@ -12,16 +12,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    let that = this
-    wx.request({
-      url: 'https://yuhal.com/about/index.html',
-      success:function(res){
-        that.setData({html:res.data})
-      },
-      error: function (res) {
-        console.log('加载失败')
-      },
-    })
 
   },
 

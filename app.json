@@ -1,16 +1,15 @@
 {
   "pages": [
-    
-    "pages/about/about",
     "pages/index/index",
+    "pages/about/about",
     "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#3f3f3f",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "HaI丶Image",
     "backgroundColor": "#fff",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#74777e",
@@ -30,12 +29,6 @@
         "text": "About"
       }
     ]
-  },
-  "plugins": {
-    "htmltowxml": {
-      "version": "1.4.0",
-      "provider": "wxa51b9c855ae38f3c"
-    }
   },
   "sitemapLocation": "sitemap.json"
 }

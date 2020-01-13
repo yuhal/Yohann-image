@@ -1,7 +1,4 @@
 /*列表*/
-.mobileListBorder{
-    margin-top:30px;
-}
 .main{
     display:flex;
     flex-wrap: wrap;
@@ -30,13 +27,6 @@
     height:158px;
     top:10px;
     left:12px;
-}
-.collectImage{
-    width:30px;
-    height:30px;
-    position: absolute;
-    right:25px;
-    top:20px;
 }
 .subMainText{
     text-align: center;

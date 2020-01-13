@@ -1,6 +1,6 @@
 <!--模版列表-->
 <view class="mobileListBorder">
-     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" style="height:400px;">
+     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}">
         <view class="main">
             <view wx:for="{{items}}" class="subMain">
                 <view class="subMainImage">
