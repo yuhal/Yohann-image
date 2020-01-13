@@ -1,70 +1,72 @@
+// 获取app变量
+var app = getApp()
+// 引入图片预加载组件
+const ImgLoader = require('../../img-loader/img-loader.js')
+// 获取图片列表
+function listImage() {
+  var imageList = []
+  wx.request({
+    url: app.globalData.domain + '/v1/listFiles', //仅为示例，并非真实的接口地址
+    data: {
+      authentication: app.globalData.authentication,
+      bucket: 'yuhal-image',
+      prefix: 'yuhal-image'
+    },
+    header: {
+      'content-type': 'application/json' // 默认值
+    },
+    success(res) {
+      imageList = res.data.data[0].items
+    },
+  })
+  return imageList
+}
+
+// 生成一些测试数据
+function genImgListData(previewImgList) {
+  for (var index in previewImgList) {
+    
+    // var age = "array[" + index + "].age";
+    // this.setData({
+    //   [loaded]: false
+    // })
+  }
+}
+
 Page({
   data: {
-    items: [
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg',
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16cd753d558.jpg', 
-      'https://image.yuhal.com/yuhal-image-5e16c5e0e1787.jpg', 
-    ],
-    winHeight: 0,
-    winWidth: 0,
+    imgList: [],
+    previewImgList: listImage()
   },
+  onLoad() {
+    console.log(this.data.previewImgList)
+    this.data.imgList = genImgListData(this.data.previewImgList)
+    console.log(this.data.imgList)
+    // 初始化图片预加载组件，并指定统一的加载完成回调
+    this.imgLoader = new ImgLoader(this, this.imageOnLoad.bind(this))
+    // 同时发起全部图片的加载
+    this.data.imgList.forEach(item => {
+      this.imgLoader.load(item.url)
+    })
+  },
+  // 加载完成后的回调
+  imageOnLoad(err, data) {
+    console.log('图片加载完成', err, data.src)
+    const imgList = this.data.imgList.map(item => {
+      if (item.url == data.src)
+        item.loaded = true
+      return item
+    })
+    this.setData({ imgList })
+  },
+  // 图片放大预览
   previewImage: function (e) {
     console.log(e)
     let currentUrl = e.currentTarget.dataset.src
     wx.previewImage({
       current: currentUrl, // 当前显示图片的http链接
-      urls: this.data.items // 需要预览的图片http链接列表
+      urls: this.data.previewImgList // 需要预览的图片http链接列表
     })
-    console.log("此处进行放大预览！");
-  },
-  onLoad: function (options) {
-    let that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          winHeight: res.windowHeight,
-          winWidth: res.windowWidth
-        })
-      }
-    })
-  },
-  onReady: function () {
-    // 页面渲染完成
-  },
-  onShow: function () {
-    // 页面显示
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
+    console.log("此处进行放大预览");
   }
 })
-function randomChar() {
-  var l = Math.random() * 10;
-  var x = "0123456789qwertyuioplkjhgfdsazxcvbnm";
-  var tmp = "";
-  var timestamp = new Date().getTime();
-  for (var i = 0; i < l; i++) {
-    tmp += x.charAt(Math.ceil(Math.random() * 100000000) % x.length);
-  }
-  return timestamp + tmp;
-}

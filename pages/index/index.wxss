@@ -1,4 +1,8 @@
 /*列表*/
+@keyframes images {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
 .main{
     display:flex;
     flex-wrap: wrap;
@@ -27,6 +31,7 @@
     height:158px;
     top:10px;
     left:12px;
+    animation: fadeIn 1s both;
 }
 .subMainText{
     text-align: center;

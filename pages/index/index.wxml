@@ -1,15 +1,16 @@
-<!--模版列表-->
+<!--图片列表-->
 <view class="mobileListBorder">
-     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}">
-        <view class="main">
-            <view wx:for="{{items}}" class="subMain">
-                <view class="subMainImage">
-                    <image src="../../image/background-down.png" class="downImage"/>
-                    <image src="../../image/background-up.png" class="upImage"/>
-                    <image class="images" data-src="{{items[index]}}" src="{{items[index]}}" bindtap="previewImage" />
-                </view>
-                <view class="subMainText">123</view>
-            </view>
-        </view>
-    </scroll-view>
+  <view class="main">
+      <view wx:for="{{imgList}}" class="subMain">
+          <view class="subMainImage">
+              <image src="../../image/background-down.png" class="downImage"/>
+              <image src="../../image/background-up.png" class="upImage"/>
+              <image class="images" wx:if="{{ item.loaded }}" src="{{ item.url }}"  data-src="{{ item.url }}" bindtap="previewImage" />
+          </view>
+          <view class="subMainText">123</view>
+      </view>
+  </view>
 </view>
+<!-- 引入图片预加载组件 -->
+<import src="../../img-loader/img-loader.wxml"/>
+<template is="img-loader" data="{{ imgLoadList }}"></template>
