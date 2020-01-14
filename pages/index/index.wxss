@@ -1,7 +1,7 @@
 /*列表*/
 @keyframes images {
     0% { opacity: 0; }
-    100% { opacity: 1; }
+    60% { opacity: 0.6; }
 }
 .main{
     display:flex;

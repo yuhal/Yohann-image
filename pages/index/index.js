@@ -44,7 +44,7 @@ Page({
         marker,
       ).then(res => {
         this.setData({
-          imgList: this.data.imgList.concat(res.data[0].items),
+          imgList: this.data.imgList.concat(genImgListData(res.data[0].items)),
           marker: res.data[0].marker,
           loading: false
         })

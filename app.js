@@ -13,10 +13,10 @@ App({
     var that = this,
       timestamp = Date.parse(new Date()) / 1000,
       nonce = Math.floor(Math.random() * 50 + 50),
-      expires_time = timestamp+3600
+      expires_time = wx.getStorageSync("expires_time")
     //进行时间比较，过期则重新获取authentication
     console.log(expires_time)
-    if (expires_time < timestamp) {
+    if (1) {
       wx.request({
         // 获取签名
         url: that.globalData.domain + '/oauth/sign/index',
