@@ -7,7 +7,7 @@
               <image src="../../image/background-up.png" class="upImage"/>
               <image class="images" wx:if="{{ item.loaded }}" src="{{ item.url }}"  data-src="{{ item.url }}" bindtap="previewImage" />
           </view>
-          <view class="subMainText">123</view>
+          <view class="subMainText">{{ item.putDate }}</view>
       </view>
   </view>
 </view>

@@ -1,4 +1,5 @@
 //app.js
+import qiniuV1 from './apis/v1/qiniu.js'
 App({
   globalData: {
     appid: 'wxbb9a70d10651829b',
@@ -12,10 +13,10 @@ App({
     var that = this,
       timestamp = Date.parse(new Date()) / 1000,
       nonce = Math.floor(Math.random() * 50 + 50),
-      refresh_expires_time = wx.getStorageSync("refresh_expires_time")
+      expires_time = timestamp+3600
     //进行时间比较，过期则重新获取authentication
-    
-    if (refresh_expires_time < timestamp) {
+    console.log(expires_time)
+    if (expires_time < timestamp) {
       wx.request({
         // 获取签名
         url: that.globalData.domain + '/oauth/sign/index',
@@ -49,7 +50,7 @@ App({
               console.log(res.data)
               that.globalData.tokenInfo = res.data.data
               // 存储过期时间
-              wx.setStorageSync("refresh_expires_time", res.data.data.refresh_expires_time);
+              wx.setStorageSync("expires_time", res.data.data.expires_time);
               // 获取authorization
               wx.request({
                 // 获取token
@@ -77,6 +78,6 @@ App({
       that.globalData.authentication = wx.getStorageSync("authentication")
     }
   }, 
-
+  qiniuV1: new qiniuV1()
   
 })
