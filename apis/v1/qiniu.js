@@ -1,5 +1,5 @@
 /**
- * name: agriknow.js
+ * name: qiniu.js
  * description: 七牛云提供的服务
  */
 import request from '../request.js'
@@ -9,7 +9,6 @@ class qiniu {
     this._defaultHeader = { 'Content-Type': 'application/json' }
     this._request = new request
     this._request.setErrorHandler(this.errorHander)
-    this.authentication = wx.getStorageSync("authentication")
   }
 
   /**
@@ -22,9 +21,9 @@ class qiniu {
   /**
    * 获取单个七牛仓库的文件列表
    */
-  listFiles(bucket, prefix, limit, marker) {
+  listFiles(authentication, bucket, prefix, limit, marker) {
     let data = { 
-      authentication: this.authentication, 
+      authentication: authentication, 
       bucket: bucket, 
       prefix: prefix,
       limit: limit,

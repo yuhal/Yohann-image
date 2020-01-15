@@ -3,9 +3,16 @@
     0% { opacity: 0; }
     60% { opacity: 0.6; }
 }
+::-webkit-scrollbar {
+     width: 0;
+     height: 0;
+     color: transparent;
+}
 .main{
     display:flex;
     flex-wrap: wrap;
+    width:100%;
+    overflow: hidden;
 }
 .subMain{
     width:50%;

@@ -1,5 +1,4 @@
 function array_column(arr,key){
-  console.log(arr)
   var res = []
   for (var index in arr) {
     res[index] = arr[index][key]
