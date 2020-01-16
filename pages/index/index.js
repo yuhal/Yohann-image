@@ -17,7 +17,7 @@ Page({
   data: {
     page: 1,
     pages: 0,
-    limit: 6,
+    limit: 10,
     marker: '',
     imgList: [],
     authentication: null
@@ -49,6 +49,8 @@ Page({
     if (!that.data.loading && that.data.marker) {
       that.listFiles(that.data.marker)
     }
+  },
+  onShareAppMessage() {
   },
   // 获取单个七牛仓库的文件列表
   listFiles(marker) {
