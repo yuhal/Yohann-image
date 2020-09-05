@@ -12,9 +12,9 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "0.0.2",
 	"appid": "wxbb9a70d10651829b",
-	"projectname": "miniprogram-test-2",
+	"projectname": "Yohann-image",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
